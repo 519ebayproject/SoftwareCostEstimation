@@ -16,6 +16,8 @@ function [ Cleaned ] = Col_processing( Raw )
         end
     else if Raw.type == 'C'
         Cleaned = (Raw.data - min(Raw.data)) * (max(Raw.data) - min(Raw.data))^(-1);
+        % imagine we have 5 intevals to discretize the continuous data.
+        Discretize(Cleaned,5)
         end
     end
 end
