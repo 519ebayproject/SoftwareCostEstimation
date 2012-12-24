@@ -29,7 +29,7 @@ j=0;
 while j~=k
     x=find(dis(:,1)==min(dis(:,1)));
     for l=1:length(x)
-        k_neighbors(j+1,:)=input(dis(x(l),2),:);
+        k_neighbors(j+1)=input(dis(x(l),2),:);
         j=j+1;
         if j == k
             break;
