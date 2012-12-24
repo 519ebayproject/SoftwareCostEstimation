@@ -35,7 +35,7 @@ for i=1:3
     trainStruct = rawStruct;
     trainStruct.data = trainData;
     FSRlt = MIFS(trainStruct,9,1);
-    disp(FSRlt);
+    %disp(FSRlt);
     
     
     %testing
