@@ -20,14 +20,14 @@ k_neighbors = zeros(k,input_col_num);
 dis = zeros(input_row_num,2);
 for row=1:input_row_num
     distance = 0;
-    for col=1:input_col_num
+    for col=1:input_col_num-1
         distance = distance + (target(col)-input(row,col))^2;
     end
     dis(row,1) = sqrt(distance); dis(row,2) = row;
 end
 j=0;
 while j~=k
-    x=find(dis(:,1)==max(dis(:,1)));
+    x=find(dis(:,1)==min(dis(:,1)));
     for l=1:length(x)
         k_neighbors(j+1)=input(dis(x(l),2));
         j=j+1;
