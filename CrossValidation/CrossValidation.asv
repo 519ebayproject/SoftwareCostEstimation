@@ -64,7 +64,6 @@ for i=1:3
     
     %define the struct to hold the final test data
     testStruct = FSRlt;
-    testStruct.data =[];
     
     % begin to 
     fsRltTitle = FSRlt.title;
@@ -89,6 +88,8 @@ for i=1:3
     disp(testStruct);
     
     
+    
+    %use current FSRlt to select feature columns from testStruct
     
     
     
