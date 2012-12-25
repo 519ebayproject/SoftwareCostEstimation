@@ -1,5 +1,9 @@
 function [ output_args ] = CrossValidation( rawStruct )
 %UNTITLED Summary of this function goes here
+%   rawStruct is the structure holds the cleanded data
+    % with .title
+    %      .type
+    %      .data
 %   Detailed explanation goes here
 
 assert(isstruct(rawStruct),'Input is not struct');
@@ -66,7 +70,7 @@ for i=1:3
     testStruct = FSRlt;
     testStruct.data =[];
     
-    % begin to 
+    % select certain rows for testing
     fsRltTitle = FSRlt.title;
     fsRltColNum = length(fsRltTitle);
     rawTestDataTitle = rawTestStruct.title;
@@ -89,8 +93,9 @@ for i=1:3
     disp(testStruct);
     
     
+    a = tj_knn(FSRlt.data,3,testStruct.data(1,:));
     
-    
+    disp(a);
     
     disp('-------------');
     
