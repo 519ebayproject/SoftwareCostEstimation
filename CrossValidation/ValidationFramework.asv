@@ -18,7 +18,6 @@ for i=1:length(trainSets);
 end
 
  testSets=adjustTestSetWithFS(featureSets,testSets);
- %testSets = featureSets;
 
  % just for one kind method first
  
@@ -66,8 +65,8 @@ end
         
  end
        % output the results from experiments of KNN
-       csvwrite('knn result.csv',[outputMean,outputWeighted]);
-       %disp([outputMean,outputWeighted]);
+       %csvwrite('knn result 2.csv',[outputMean,outputWeighted]);
+       disp([outputMean,outputWeighted]);
  
  
  fprintf('for parzen window h from %d to %d increased by %d:\n',minH,maxH,incH);
@@ -76,8 +75,6 @@ end
  for wndInc = minH:incH:maxH
      resultsMean=[];
      resultsWeighted=[];
-     
-     % to count how many cases cannot be estimated using this parameter
      caseWithNoNeighbours=0;
     for testSetIdx=1:length(testSets)
         currentTestSetData = testSets(testSetIdx).data;
@@ -106,33 +103,23 @@ end
         end    
     end
            % disp(results);
-        %disp(caseWithNoNeighbours);
-        if(caseWithNoNeighbours > 0.33*testSetRow)
-            % if unestimatable cases are over the 1/3 of the total cases
-            mmreMean = -1;
-            mdmreMean = -1;
-            predMean = -1;
-            
-            mmreWeighted = -1;
-            mdmreWeighted = -1;
-            predWeighted = -1;
-        else
-            %for the results, calculate related metrics
-            mmreMean = MMRE(resultsMean(:,1),resultsMean(:,2));
-            mdmreMean = MdMRE(resultsMean(:,1),resultsMean(:,2));
-            predMean = PRED025(resultsMean(:,1),resultsMean(:,2));
+           disp(caseWithNoNeighbours);
 
-            mmreWeighted = MMRE(resultsWeighted(:,1),resultsWeighted(:,2));
-            mdmreWeighted = MdMRE(resultsWeighted(:,1),resultsWeighted(:,2));
-            predWeighted = PRED025(resultsWeighted(:,1),resultsWeighted(:,2));
-        end  
+        %for the results, calculate related metrics
+        mmreMean = MMRE(resultsMean(:,1),resultsMean(:,2));
+        mdmreMean = MdMRE(resultsMean(:,1),resultsMean(:,2));
+        predMean = PRED025(resultsMean(:,1),resultsMean(:,2));
+        
+        mmreWeighted = MMRE(resultsWeighted(:,1),resultsWeighted(:,2));
+        mdmreWeighted = MdMRE(resultsWeighted(:,1),resultsWeighted(:,2));
+        predWeighted = PRED025(resultsWeighted(:,1),resultsWeighted(:,2));
         
         outputMean = [outputMean;[wndInc,mmreMean,mdmreMean,predMean]];
         outputWeighted = [outputWeighted;[wndInc,mmreWeighted,mdmreWeighted,predWeighted]];      
  end
     % output the results from experiments of Parzen Window
-       csvwrite('parzen window result.csv',[outputMean,outputWeighted]);
-      %disp([outputMean,outputWeighted]);
+     %  csvwrite('parzen window result.csv',output);
+      disp([outputMean,outputWeighted]);
  
  
   disp('for mkp:\n');
@@ -179,7 +166,7 @@ end
         outputWeighted=[outputWeighted;[wndInc,knnInc,mmreWeighted,mdmreWeighted,predWeighted]];
  end
         %output the results from experiments of mpk
-        csvwrite('mkp result.csv',[outputMean,outputWeighted]);
+       % csvwrite('mkp result.csv',output);
         %disp([outputMean,outputWeighted]);
  end
  
