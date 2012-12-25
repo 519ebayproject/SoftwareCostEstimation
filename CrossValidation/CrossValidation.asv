@@ -1,13 +1,9 @@
-function [ mmre, mdmre, pred ] = CrossValidation( rawStruct, evalMethod)
+function [ output_args ] = CrossValidation( rawStruct, evalMethod)
 %UNTITLED Summary of this function goes here
 %   rawStruct is the structure holds the cleanded data
     % with .title
     %      .type
     %      .data
-    
-    % evalMethod
-    % the process of certain method to calculate the estimates
-    
 %   Detailed explanation goes here
 
 assert(isstruct(rawStruct),'Input is not struct');
@@ -21,7 +17,7 @@ rawData = rawStruct.data;
 indices = crossvalind('kfold',rowNum,3);
 
  % define the martix holds the actual effort & estimate effort
- results=zeros(1,2);
+ Results=zeros(1,2);
 
 % iterate for 3 times to do the validation
 for i=1:3
@@ -103,7 +99,7 @@ for i=1:3
    actuals = rawTestStruct.data(:,rawTestDataColNum);
    
    % combine estimates and actuals together
-   results = [results;[actuals,estimates]];
+   Results = [Resuls;[actuals,estimates]];
    
     
     
@@ -112,16 +108,5 @@ for i=1:3
     disp('-------------');
 end
 
-% after the experiments have been conducted three times.
-% to get metrics
-mmre = MMRE(results(:,1),results(:,2));
-mdmre = MdMRE(results(:,1),results(:,2));
-pred = PRED025(results(:,1),results(:,2));
-
-
-
-
-
-
-
+%after the experiments have been conducted three time
 
