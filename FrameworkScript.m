@@ -12,5 +12,5 @@
 %FSRlt = MIFS(Cleaned,9,1);
 %csvwrite('FS.csv',FSRlt.data);
 
-ValidationFramework('Desharnais[USE].xls',1,17,0.8,2.0,0.1);
+ValidationFramework('Desharnais[USE].xls',1,17,0.6,2.0,0.1);
 
