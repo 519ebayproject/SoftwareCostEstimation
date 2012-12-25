@@ -8,8 +8,8 @@ function [ neighbors ] = tj_parzen_window( input,max_dis,target )
 
 [input_row_num,input_col_num] = size(input);
 target_col_num = length(target);
+neighbors = [];
 if input_col_num ~= target_col_num || max_dis<=0
-    neighbors = [];
     return;
 end
 % neighbors = zeros(k,input_col_num);
