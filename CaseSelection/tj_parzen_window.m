@@ -25,7 +25,7 @@ j=1;
 while j~=input_row_num+1
     if dis(j,1) <= max_dis
         neighbors(j,(1:input_col_num))=input(dis(j,2),:);
-        neighbors(j,input_col_num+1)=1/dis(j,1);
+        neighbors(j,input_col_num+1)=dis(j,1);
     end
     j=j+1;
 end
