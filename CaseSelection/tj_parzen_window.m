@@ -5,7 +5,7 @@ function [ neighbors ] = tj_parzen_window( input,max_dis,target )
 %   input: historical cases (2-dimensional array)
 %   max_dis: the maximum distance
 %   target: the case to be predicted (1-dimensional array)
-
+adjust_value=0.001;
 [input_row_num,input_col_num] = size(input);
 target_col_num = length(target);
 neighbors = [];
@@ -25,7 +25,7 @@ j=1;
 while j~=input_row_num+1
     if dis(j,1) <= max_dis
         neighbors(j,(1:input_col_num))=input(dis(j,2),:);
-        neighbors(j,input_col_num+1)=dis(j,1);
+        neighbors(j,input_col_num+1)=1/(dis(j,1)+adjust_value);
     end
     j=j+1;
 end

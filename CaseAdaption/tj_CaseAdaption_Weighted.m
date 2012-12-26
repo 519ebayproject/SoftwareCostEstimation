@@ -14,7 +14,7 @@ end
 sum_value=0;
 sum_col=sum(neighbors(:,col));
 for i=1:row
-    sum_value=sum_value+neighbors(i,col-1)*(sum_col-neighbors(i,col));
+    sum_value=sum_value+neighbors(i,col-1)*(neighbors(i,col));
 end
 estimation = sum_value / sum_col;
 
