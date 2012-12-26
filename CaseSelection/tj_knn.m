@@ -5,7 +5,7 @@ function [ k_neighbors ] = tj_knn( input,k,target )
 %   input: historical cases (2-dimensional array)
 %   k: the number of neighbors to select
 %   target: the case to be predicted (1-dimensional array)
-
+adjust_value=0.001;
 [input_row_num,input_col_num] = size(input);
 target_col_num = length(target);
 if input_col_num ~= target_col_num || k<0
@@ -30,7 +30,7 @@ while j~=k
     x=find(dis(:,1)==min(dis(:,1)));
     for l=1:length(x)
         k_neighbors(j+1,(1:input_col_num))=input(dis(x(l),2),:);
-        k_neighbors(j+1,input_col_num+1) = dis(x(l),1);
+        k_neighbors(j+1,input_col_num+1) = 1/(dis(x(l),1)+adjust_value);
         j=j+1;
         if j == k
             break;
