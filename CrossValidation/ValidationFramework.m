@@ -1,4 +1,14 @@
 function [args] = ValidationFramework(filepath,minK,maxK,minH,maxH,incH)
+
+% filepath: the filepath of input dataset
+% minK: the minimal number of neighbors to be evaluated for KNN and MKP
+% maxK: the maximal number of neighbors to be evaluated for KNN and MKP
+% minH: the minimal window size to be evaluated for Parzen Window and MKP
+% maxH: the maximal window size to be evaluated for Parzen Window and MKP
+% incH: the increment for window size for each evaluation of Parzen Window and MKP
+
+
+disp('preprocessing...\n');
 data = readData(filepath);
 data = excludeNaN(data);
 data = encapsulateData(data);
@@ -12,9 +22,12 @@ cleaned = Preprocess(data);
 % but feature selection is needed only once
 featureSets=[];
 
+disp('feauture selection...\n');
+
 for i=1:length(trainSets);
-   fsRlt = MIFS(trainSets(i),5,1);
+   fsRlt = MIFS(trainSets(i),5,0.2);
    featureSets=[featureSets;fsRlt];
+   
 end
 
  testSets=adjustTestSetWithFS(featureSets,testSets);
@@ -67,6 +80,7 @@ end
  end
        % output the results from experiments of KNN
        csvwrite('knn result.csv',[outputMean,outputWeighted]);
+       disp('write knn result to csv');
        %disp([outputMean,outputWeighted]);
  
  
@@ -132,6 +146,7 @@ end
  end
     % output the results from experiments of Parzen Window
        csvwrite('parzen window result.csv',[outputMean,outputWeighted]);
+       disp('write parzen window result to csv');
       %disp([outputMean,outputWeighted]);
  
  
@@ -178,9 +193,10 @@ end
         outputMean=[outputMean;[wndInc,knnInc,mmreMean,mdmreMean,predMean]];
         outputWeighted=[outputWeighted;[wndInc,knnInc,mmreWeighted,mdmreWeighted,predWeighted]];
  end
-        %output the results from experiments of mpk
-        csvwrite('mkp result.csv',[outputMean,outputWeighted]);
-        %disp([outputMean,outputWeighted]);
+        
  end
- 
+ %output the results from experiments of mpk
+        csvwrite('mkp result.csv',[outputMean,outputWeighted]);
+        disp('write mkp result to csv');
+        %disp([outputMean,outputWeighted]);
 end

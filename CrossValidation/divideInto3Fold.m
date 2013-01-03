@@ -71,7 +71,7 @@ for i=1:3
     testSets=[testSets;rawTestStruct];
    
     
-    disp(rawTestStruct);
+   % disp(rawTestStruct);
     
  
 end

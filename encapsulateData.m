@@ -14,7 +14,7 @@ output.type = output.title;   % do not know how to initialize a char matrix
 %traverse all columns
 for i=1:n
    temp = cell2mat(data(2,i));  
-   disp(temp);
+   %disp(temp);
    if(ischar(temp))
        output.type(1,i)={'D'};
    end
